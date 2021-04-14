@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headers">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/css/uikit.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<nav th:fragment="navbar" class="uk-navbar-container uk-margin" uk-navbar="mode: click">
+    <div class="uk-navbar-center">
+
+        <ul class="uk-navbar-nav">
+            <li class="uk-navbar-item uk-logo">Moje-docházka</li>
+            <li class="uk-navbar-item"><a th:href="@{/web/employee}" href="#">Zaměstananci</a></li>
+            <li class="uk-navbar-item"><a href="#" th:href="@{/web/event}">Události</a></li>
+            <li class="uk-navbar-item"><a href="#" th:href="@{/web/office}">Kanceláře</a></li>
+        </ul>
+    </div>
+</nav>
+<div th:fragment="scripts">
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit-icons.min.js"></script>
+</div>
+</body>
+</html>

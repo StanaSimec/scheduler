@@ -1,0 +1,55 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Detail kanceláře</title>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container uk-width-1-4@s">
+    <p class="uk-legend">Detail kanceláře</p>
+    <form class="uk-form-stacked" action="#" th:object="${officeDTO}" method="post">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="city">Město:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{city}" id="city"
+                       placeholder="Město" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="address">Adresa:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{address}" id="address"
+                       placeholder="Adresa" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="capacity">Kapacita:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="number" th:field="*{capacity}" id="capacity"
+                       placeholder="Kapacita" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></span>
+        </div>
+        <a class="uk-button uk-button-primary uk-button-small uk-width-1-1 uk-margin-top"
+           th:href="@{/web/office/update/{id}(id=${officeDTO.id})}">AKTUALIZOVAT</a>
+    </form>
+    <button class="uk-button uk-button-danger uk-button-small uk-width-1-1 uk-margin-top"
+            uk-toggle="target: #delete-modal" type="button">SMAZAT
+    </button>
+    <div id="delete-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h1 class="uk-modal-title"
+                th:text="'Opravdu chcete smazat kancelář ' + ${officeDTO.city} + ' ?'">
+                Smazat</h1>
+            <form th:action="@{/web/office/delete/{id}(id=${officeDTO.id})}" method="post">
+                <input type="submit" value="DELETE" class="uk-button uk-button-danger uk-button-small"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Aktualizace události</title>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container uk-width-1-4@s">
+    <p class="uk-legend">Aktualizace události</p>
+    <form class="uk-form-stacked" action="#" th:action="@{/web/event/update/{id}(id=${eventDTO.id})}" th:object="${eventDTO}" method="post">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="type">Typ:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{type}" id="type"
+                       placeholder="Typ">
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="employee">Zaměstnanec:</label>
+            <div class="uk-form-controls">
+                <select class="uk-input uk-form-small" th:field="*{employeeId}" id="employee" placeholder="Zaměstnanec">
+                    <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.surname}" th:selected="${employee.id == employeeId}"></option>
+                </select>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span>
+        </div>
+        <button class="uk-button uk-button-primary uk-button-small uk-width-1-1" type="submit" name="action">AKTUALIZOVAT
+        </button>
+    </form>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

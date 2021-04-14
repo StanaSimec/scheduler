@@ -1,0 +1,42 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Aktualizovat kancelář</title>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container uk-width-1-4@s">
+    <p class="uk-legend">Aktualizovat kancelář</p>
+    <form class="uk-form-stacked" action="#" th:action="@{/web/office/update/{id}(id=${officeDTO.id})}" th:object="${officeDTO}" method="post">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="city">Město:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{city}" id="city"
+                       placeholder="Město">
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="address">Adresa:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{address}" id="address"
+                       placeholder="Adresa">
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="capacity">Kapacita:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="number" th:field="*{capacity}" id="capacity"
+                       placeholder="Kapacita">
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></span>
+        </div>
+        <button class="uk-button uk-button-primary uk-button-small uk-width-1-1" type="submit" name="action">AKTUALIZOVAT
+        </button>
+    </form>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

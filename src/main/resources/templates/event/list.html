@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Seznam událostí</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container">
+    <h1 class="uk-heading-small uk-heading-bullet">Seznam událostí</h1>
+    <table class="uk-table uk-table-middle uk-table-divider">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Datum</th>
+            <th>Typ</th>
+        </tr>
+        </thead>
+        <tr th:each="event: ${events}">
+            <td th:text="${event.id}"></td>
+            <td th:text="${event.createdAt}"></td>
+            <td th:text="${event.type}"></td>
+            <td><a class="uk-button uk-button-primary uk-button-small"
+                   th:href="@{event/detail/{id}(id=${event.id})}">Detail</a></td>
+        </tr>
+    </table>
+    <a th:href="@{event/new}"><span uk-icon="plus"></span></a>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

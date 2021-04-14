@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Seznam kanceláři</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container">
+    <h1 class="uk-heading-small uk-heading-bullet">Seznam kanceláři</h1>
+    <table class="uk-table uk-table-middle uk-table-divider">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Město</th>
+            <th>Address</th>
+            <th>Kapacita</th>
+        </tr>
+        </thead>
+        <tr th:each="office: ${offices}">
+            <td th:text="${office.id}"></td>
+            <td th:text="${office.city}"></td>
+            <td th:text="${office.address}"></td>
+            <td th:text="${office.capacity}"></td>
+            <td><a class="uk-button uk-button-primary uk-button-small"
+                   th:href="@{office/detail/{id}(id=${office.id})}">Detail</a></td>
+        </tr>
+    </table>
+    <a th:href="@{office/new}"><span uk-icon="plus"></span></a>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

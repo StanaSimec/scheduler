@@ -1,0 +1,49 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Detail události</title>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container uk-width-1-4@s">
+    <p class="uk-legend">Detail události</p>
+    <form class="uk-form-stacked" action="#" th:object="${eventDTO}" method="post">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="type">Typ:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{type}" id="type"
+                       placeholder="Typ" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="employee">Zaměstnanec:</label>
+            <div class="uk-form-controls">
+                <select class="uk-input uk-form-small" th:field="*{employeeId}" id="employee" placeholder="Zaměstnanec"
+                        disabled>
+                    <option th:value="${employee.id}" th:text="${employee.surname}"></option>
+                </select>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span>
+        </div>
+        <a class="uk-button uk-button-primary uk-button-small uk-width-1-1 uk-margin-top"
+           th:href="@{/web/event/update/{id}(id=${eventDTO.id})}">AKTUALIZOVAT</a>
+    </form>
+    <button class="uk-button uk-button-danger uk-button-small uk-width-1-1 uk-margin-top"
+            uk-toggle="target: #delete-modal" type="button">SMAZAT
+    </button>
+    <div id="delete-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h1 class="uk-modal-title"
+                th:text="'Opravdu chcete smazat událost ' + ${eventDTO.type} + ' ?'">
+                Smazat</h1>
+            <form th:action="@{/web/event/delete/{id}(id=${eventDTO.id})}" method="post">
+                <input type="submit" value="DELETE" class="uk-button uk-button-danger uk-button-small"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

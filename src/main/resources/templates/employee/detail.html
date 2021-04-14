@@ -1,0 +1,90 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Detail zaměstnance</title>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container uk-width-1-4@s">
+    <p class="uk-legend">Detail zaměstnance</p>
+    <form class="uk-form-stacked" action="#" th:object="${employeeDTO}" method="post">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="name">Jméno:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{name}" id="name"
+                       placeholder="Jméno" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="surname">Příjmení:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{surname}" id="surname"
+                       placeholder="Příjmení" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="address">Adresa:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{address}" id="address"
+                       placeholder="Adresa" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="code">Kód:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{code}" id="code" placeholder="Kód"
+                       disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="dateOfBirth">Datum narození:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="date" th:field="*{dateOfBirth}" id="dateOfBirth"
+                       placeholder="Datum narození" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="dateOfBirth">Pozice</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" type="text" th:field="*{positionName}" id="positionName"
+                       placeholder="Pozice" disabled>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('positionName')}" th:errors="*{positionName}"></span>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="office">Kancelář:</label>
+            <div class="uk-form-controls">
+                <select class="uk-input uk-form-small" th:field="*{officeId}" id="office" placeholder="Kancelář"
+                        disabled>
+                    <option th:value="${office.id}" th:text="${office.city}"></option>
+                </select>
+            </div>
+            <span style="color: red" th:if="${#fields.hasErrors('officeId')}" th:errors="*{officeId}"></span>
+        </div>
+        <a class="uk-button uk-button-primary uk-button-small uk-width-1-1 uk-margin-top"
+           th:href="@{/web/employee/update/{id}(id=${employeeDTO.id})}">AKTUALIZOVAT</a>
+    </form>
+    <button class="uk-button uk-button-danger uk-button-small uk-width-1-1 uk-margin-top"
+            uk-toggle="target: #delete-modal" type="button">SMAZAT
+    </button>
+    <div id="delete-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h1 class="uk-modal-title"
+                th:text="'Opravdu chcete smazat zaměstnance ' + ${employeeDTO.name} + ' ' + ${employeeDTO.surname} + ' ?'">
+                smazat</h1>
+            <form th:action="@{/web/employee/delete/{id}(id=${employeeDTO.id})}" method="post">
+                <input type="submit" value="DELETE" class="uk-button uk-button-danger uk-button-small"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>

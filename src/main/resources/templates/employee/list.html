@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments.html :: headers"/>
+    <title>Seznam zaměstnanců</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:insert="fragments.html :: navbar"></div>
+<div class="uk-container">
+    <h1 class="uk-heading-small uk-heading-bullet">Seznam zaměstnanců</h1>
+    <table class="uk-table uk-table-middle uk-table-divider">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Jméno</th>
+            <th>Přijmení</th>
+            <th>Adresa</th>
+            <th>Kód</th>
+            <th>Datum narození</th>
+            <th>Pozice</th>
+        </tr>
+        </thead>
+        <tr th:each="employee: ${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.surname}"></td>
+            <td th:text="${employee.address}"></td>
+            <td th:text="${employee.code}"></td>
+            <td th:text="${employee.dateOfBirth}"></td>
+            <td th:text="${employee.positionName}"></td>
+            <td><a class="uk-button uk-button-primary uk-button-small"
+                   th:href="@{employee/detail/{id}(id=${employee.id})}">Detail</a></td>
+        </tr>
+    </table>
+    <a th:href="@{employee/new}"><span uk-icon="plus"></span></a>
+</div>
+<div th:insert="fragments.html :: scripts"></div>
+</body>
+</html>
