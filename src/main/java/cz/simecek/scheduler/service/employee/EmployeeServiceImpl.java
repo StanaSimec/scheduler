@@ -31,7 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDTO.setSurname(employee.getSurname());
         employeeDTO.setCode(employee.getCode());
         employeeDTO.setAddress(employee.getAddress());
-        employeeDTO.setDateOfBirth(employee.getDateOfBirth());
         employeeDTO.setPositionName(employee.getPositionName());
         employeeDTO.setEvents(employee.getEvents());
         employeeDTO.setOfficeId(employee.getOffice().getId());
@@ -53,7 +52,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setSurname(employeeDTO.getSurname());
         employee.setCode(employeeDTO.getCode());
         employee.setAddress(employeeDTO.getAddress());
-        employee.setDateOfBirth(employeeDTO.getDateOfBirth());
         employee.setPositionName(employeeDTO.getPositionName());
         return employee;
     }
@@ -96,7 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = getDbEntityById(id);
         Employee toUpdateEmployee = toEmployee(employee, employeeDTO);
         toUpdateEmployee.setId(id);
-        if(employeeDTO.getOfficeId() != null && !employeeDTO.getOfficeId().equals(toUpdateEmployee.getOffice().getId())){
+        if (employeeDTO.getOfficeId() != null && !employeeDTO.getOfficeId().equals(toUpdateEmployee.getOffice().getId())) {
             Office office = officeService.getDbEntityById(employeeDTO.getOfficeId());
             employee.setOffice(office);
         }

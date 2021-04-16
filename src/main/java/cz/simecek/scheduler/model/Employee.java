@@ -23,8 +23,6 @@ public class Employee {
 
     private String address;
 
-    private Date dateOfBirth;
-
     private String positionName;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
@@ -73,14 +71,6 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPositionName() {

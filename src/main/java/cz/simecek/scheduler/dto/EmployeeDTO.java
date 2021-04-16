@@ -1,5 +1,6 @@
 package cz.simecek.scheduler.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import cz.simecek.scheduler.model.Event;
 
@@ -23,9 +24,6 @@ public class EmployeeDTO {
 
     @NotBlank(message = "Address is mandatory")
     private String address;
-
-    @NotNull(message = "Date of birth is mandatory")
-    private Date dateOfBirth;
 
     @NotBlank(message = "Position name is mandatory")
     private String positionName;
@@ -73,14 +71,6 @@ public class EmployeeDTO {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPositionName() {
